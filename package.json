@@ -1,6 +1,6 @@
 {
   "name": "dom-validator",
-  "version": "1.0.1",
+  "version": "1.0.22",
   "description": "Validator similar to vee-validator for vuejs Applications",
   "main": "index.js",
   "scripts": {
