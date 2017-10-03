@@ -1,6 +1,6 @@
 {
   "name": "dom-validator",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Validator similar to vee-validator for vuejs Applications",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,15 @@
     "type": "git",
     "url": "https://github.com/willypuzzle/dom-validator.git"
   },
+  "bugs": {
+    "url": "https://github.com/willypuzzle/dom-validator/issues"
+  },
   "license": "ISC",
   "dependencies": {
     "validator": "^8.2.0"
-  }
+  },
+  "keywords": [
+    "validator","vue","vee-validator"
+  ],
+  "homepage": "https://github.com/willypuzzle/dom-validator"
 }
