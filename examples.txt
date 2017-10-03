@@ -1,0 +1,12 @@
+<v-checkbox name="checkbox" v-validate="'required'" label="checkbox1" v-model="testCheckBox" light value="value1"></v-checkbox>
+                <v-checkbox name="checkbox" label="checkbox2" v-model="testCheckBox" light value="value2"></v-checkbox>
+                <v-checkbox name="boolean-checkbox" label="Boolean Checkbox" v-validate="'required'" v-model="testBooleanCheckBox" light></v-checkbox>
+                <v-radio label="Radio 1" v-validate="'required'" name="radio" v-model="testRadio" value="radio-1"></v-radio>
+                <v-radio label="Radio 2" name="radio" v-model="testRadio" value="radio-2"></v-radio>
+                <v-radio label="Radio 3" name="radio" v-model="testRadio" value=""></v-radio>
+                <v-switch label="Switch 1" name="switch" v-validate="'required|in_values:switch-2,switch-3|number_of:2'" v-model="testSwitch" value="switch-1"></v-switch>
+                <v-switch label="Switch 2" name="switch" v-model="testSwitch" value="switch-2"></v-switch>
+                <v-switch label="Switch 3" name="switch" v-model="testSwitch" value="switch-3"></v-switch>
+                <v-switch label="Switch 4" name="switch" v-model="testSwitch" value="switch-4"></v-switch>
+                <v-switch label="Switch 5" name="switch" v-model="testSwitch" value="switch-5"></v-switch>
+                <v-switch label="Boolean Switch" name="boolean-switch"  v-validate="'required'" v-model="testBooleanSwitch"></v-switch>
