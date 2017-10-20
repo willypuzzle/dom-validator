@@ -1,6 +1,6 @@
 {
   "name": "dom-validator",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Validator similar to vee-validator for vuejs Applications",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "vue": "^2.1.10",
     "validator": "^8.2.0"
   },
   "keywords": [
