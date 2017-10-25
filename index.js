@@ -5,7 +5,9 @@ import { assign } from './utils';
 
 let ValidatorPlugin = {
     install: function (Vue, options) {
-        let defaultOptions = {};
+        let defaultOptions = {
+            xs_small_messages: true
+        };
 
         const config = assign({}, defaultOptions, options);
 

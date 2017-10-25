@@ -9,6 +9,7 @@ export default class Validator {
       this.scopes = {}
       this.locale = options.locale
       this.owner = owner
+      this.message_file_suffix = options.xs_small_messages ? '_xs' : '';
   }
 
   attach(fieldName, component, binding, type, scope = '__global__', siblings = [] ){
@@ -112,7 +113,10 @@ export default class Validator {
                   if(requiredController && errors.length === 0 && !checkFunction(value, param, scope, otherComponentsInScope, this, fieldName)){
                       this._addComponentToGlobalArray(component)
                       let fieldNamex = getDataAttribute(component.$el, 'as') ? getDataAttribute(component.$el, 'as') : fieldName;
-                      let m = messages[this.locale ? this.locale : 'it_xs'];
+                      let m = messages[this.locale ? this.locale + this.message_file_suffix : 'it_xs'];
+                      if(!m){
+                          m = messages['it_xs'];
+                      }
                       let c = m[index]
                       if(!Array.isArray(param)){
                           param = [String(param)]
