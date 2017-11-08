@@ -197,7 +197,7 @@ export default class Validator {
           return validatorParam;
       }
 
-      let rules = validatorParam.split('|');
+      let rules = (validatorParam || '').split('|');
 
       if(rules.length ===1 && rules[0].trim() === ''){
           return {
