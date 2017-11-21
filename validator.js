@@ -44,13 +44,19 @@ export default class Validator {
 
       return Promise.all(promises)
           .then((result) => {
+              let resultx = {};
               for(let index in result){
-                  if(!result[index]){
+                  let el = result[index];
+                  if(!el){
                       return false;
+                  }else{
+                      resultx[el.field] = el.value;
                   }
               }
 
-              return true;
+              return {
+                  data: resultx
+              };
           })
   }
 
@@ -77,6 +83,7 @@ export default class Validator {
               let r = rules.rules
               let errors = [];
               let requiredController = this._checkForRequired(r, componentTag, component);
+              let mainValue = null;
               for(let index in r){
                   let a = r[index];
                   let param  = a && Array.isArray(a) && a.length > 0 ? (a.length > 1 ? a : a[0]) : a;
@@ -123,6 +130,8 @@ export default class Validator {
                       }
                       errors.push((c ? c: m['_default'])(fieldNamex, param))
                   }
+
+                  mainValue = value;
               }
 
               let ctrl = errors.length === 0;
@@ -139,7 +148,14 @@ export default class Validator {
                   }
               }
 
-              resolve(ctrl)
+              if(!ctrl){
+                  resolve(ctrl)
+              }else{
+                  resolve({
+                      field: fieldName,
+                      value: mainValue
+                  });
+              }
           })
       })
 
