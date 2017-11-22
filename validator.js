@@ -75,6 +75,17 @@ export default class Validator {
       return this._validate(fieldName, type, component, scopex.binding, siblings, scope);
   }
 
+  setErrors(errorsObj, scope = '__global__'){
+      let errors = errorsObj.errors;
+      for(let fieldName in errors){
+          let fieldErrorValues = errors[fieldName];
+          let scopex = this.scopes[scope][fieldName];
+          let component = scopex.component;
+
+          this._setComponentForValidation(component, fieldErrorValues)
+      }
+  }
+
   _validate(fieldName, componentTag, component, binding, siblings, scope){
       return new Promise((resolve, refuse) => {
           setTimeout(() => {
