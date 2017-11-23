@@ -1,1 +1,1 @@
-export default (value) => /^[0-9]+$/.test(String(value));
+export default (value) => /^-?(([1-9][0-9]+)|([0-9]))$/.test(String(value));

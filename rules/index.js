@@ -9,6 +9,7 @@ import credit_card from './credit_card';
 import decimal from './decimal';
 import digits from './digits';
 import dimensions from './dimensions';
+import dummy from './dummy';
 import email from './email';
 import ext from './ext';
 import image from './image';
@@ -43,6 +44,7 @@ export default {
   decimal,
   digits,
   dimensions,
+  dummy,
   email,
   ext,
   image,
