@@ -1,7 +1,7 @@
 let transformFunction = (val) => {
-    let c = val.replace(',', '.')
+    let c = val ? String(val).replace(',', '.') : String(Number.MAX_SAFE_INTEGER)
     c = parseFloat(c);
-    return isNaN(c) ? 0 : c;
+    return isNaN(c) ? Number.MAX_SAFE_INTEGER : c;
 }
 
 export default (value, params, scope, otherComponentsInScope, ownValidator, fieldName) => {
