@@ -50,7 +50,7 @@ export default class Validator {
                   if(!el){
                       return false;
                   }else{
-                      resultx[el.field] = el.value;
+                      resultx[el.field] = this._parseValue(el.value, el.rules);
                   }
               }
 
@@ -80,9 +80,11 @@ export default class Validator {
       for(let fieldName in errors){
           let fieldErrorValues = errors[fieldName];
           let scopex = this.scopes[scope][fieldName];
-          let component = scopex.component;
+          if(scopex){
+              let component = scopex.component;
 
-          this._setComponentForValidation(component, fieldErrorValues)
+              this._setComponentForValidation(component, fieldErrorValues)
+          }
       }
   }
 
@@ -163,6 +165,7 @@ export default class Validator {
                   resolve(ctrl)
               }else{
                   resolve({
+                      rules: r,
                       field: fieldName,
                       value: mainValue
                   });
@@ -245,6 +248,25 @@ export default class Validator {
       return {
           rules: validator
       }
+  }
+
+  _parseValue(value, rules){
+      for(let index in rules){
+          switch (index){
+              case 'decimal':
+                  value = parseFloat(String(value).replace('.', '').replace(',', '.'));
+                  break;
+              case 'decimal_en':
+                  value = parseFloat(String(value).replace(',', ''))
+                  break;
+              case 'numeric':
+                  value = parseInt(String(value));
+                  break;
+
+          }
+      }
+
+      return value;
   }
 
   scroll(offset = 130){
