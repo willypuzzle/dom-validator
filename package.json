@@ -1,6 +1,6 @@
 {
   "name": "dom-validator",
-  "version": "1.2.1-alpha.10",
+  "version": "1.2.1-alpha.16",
   "description": "Validator similar to vee-validator for vuejs Applications",
   "main": "index.js",
   "scripts": {
@@ -16,11 +16,14 @@
   },
   "license": "ISC",
   "dependencies": {
-    "vue": "^2.1.10",
-    "validator": "^8.2.0"
+    "moment": "^2.20.1",
+    "validator": "^8.2.0",
+    "vue": "^2.1.10"
   },
   "keywords": [
-    "validator","vue","vee-validator"
+    "validator",
+    "vue",
+    "vee-validator"
   ],
   "homepage": "https://github.com/willypuzzle/dom-validator"
 }

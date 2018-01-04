@@ -2,6 +2,7 @@ import Rules from './rules';
 import MultipleElementRules from './multi-rules';
 import { warn, isObject, getDataAttribute, getComponentType, ComponentTypes } from './utils';
 import messages from './messages';
+import {parseDateIntoString} from './utilities/date'
 
 
 export default class Validator {
@@ -130,7 +131,7 @@ export default class Validator {
                       default:
                           warn(`Validator.validate, ${componentTag} vuetify component not binded`)
                   }
-                  if(requiredController && errors.length === 0 && !checkFunction(value, param, scope, otherComponentsInScope, this, fieldName)){
+                  if(requiredController && errors.length === 0 && !checkFunction(value, param, scope, otherComponentsInScope, this, fieldName, this.locale)){
                       this._addComponentToGlobalArray(component)
                       let fieldNamex = getDataAttribute(component.$el, 'as') ? getDataAttribute(component.$el, 'as') : fieldName;
                       let m = messages[this.locale ? this.locale + this.message_file_suffix : 'it_xs'];
@@ -252,6 +253,7 @@ export default class Validator {
 
   _parseValue(value, rules){
       for(let index in rules){
+          let params = rules[index];
           switch (index){
               case 'decimal':
                   value = parseFloat(String(value).replace('.', '').replace(',', '.'));
@@ -261,6 +263,9 @@ export default class Validator {
                   break;
               case 'numeric':
                   value = parseInt(String(value));
+                  break;
+              case 'date':
+                  value = parseDateIntoString(value, params, this.locale)
                   break;
 
           }
