@@ -53,6 +53,10 @@ let dateCheck = (date, operator, delta, params, locale, otherComponentsInScope) 
         return false;
     }
 
+    if(second === true){
+        return true;
+    }
+
 
     switch (op){
         case '>':
@@ -84,6 +88,10 @@ let buildSecond = (params, locale, deltax, field, otherComponentsInScope) => {
         return false;
     }
 
+    if(referringTime === true){
+        return true;
+    }
+
     switch (rule){
         case 'before':
             return moment(referringTime).subtract(parseInt(value), unit).format('YYYY-MM-DD');
@@ -105,6 +113,9 @@ let buildReferringTime = (params, locale, field, otherComponentsInScope) => {
     for(let index in otherComponentsInScope){
         if(index === field){
             let val = otherComponentsInScope[index].component.inputValue || otherComponentsInScope[index].component.lazyValue;
+            if(!val){
+                return true;
+            }
             val = parseDateIntoString(val, params, locale);
             if(val){
                 return moment(val).format('YYYY-MM-DD')

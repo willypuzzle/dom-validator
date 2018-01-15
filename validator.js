@@ -3,6 +3,8 @@ import MultipleElementRules from './multi-rules';
 import { warn, isObject, getDataAttribute, getComponentType, ComponentTypes } from './utils';
 import messages from './messages';
 import {parseDateIntoString} from './utilities/date'
+import {parseFloatLocale} from './utilities/number'
+
 
 
 export default class Validator {
@@ -106,27 +108,28 @@ export default class Validator {
                   }
                   let value = '';
                   let checkFunction = null;
+                  let functionIndex = String(index).replace(/\*+$/g, '')
                   switch (componentTag){
                       case ComponentTypes.TEXT_FIELD:
                           value = component.lazyValue;
-                          checkFunction = Rules[index];
+                          checkFunction = Rules[functionIndex];
                           break;
                       case ComponentTypes.SELECT:
                           let selectItemArray = component.selectedItems;
                           value = selectItemArray.length ? selectItemArray[0][component.itemValue] : '';
-                          checkFunction = Rules[index]
+                          checkFunction = Rules[functionIndex]
                           break;
                       case ComponentTypes.CHECK_BOX:
                           value = component.inputValue;
-                          checkFunction = MultipleElementRules[index]
+                          checkFunction = MultipleElementRules[functionIndex]
                           break;
                       case ComponentTypes.RADIO:
                           value = component.inputValue;
-                          checkFunction = MultipleElementRules[index]
+                          checkFunction = MultipleElementRules[functionIndex]
                           break;
                       case ComponentTypes.SWITCH:
                           value = component.inputValue;
-                          checkFunction = MultipleElementRules[index]
+                          checkFunction = MultipleElementRules[functionIndex]
                           break;
                       default:
                           warn(`Validator.validate, ${componentTag} vuetify component not binded`)
@@ -236,6 +239,7 @@ export default class Validator {
           }
       }
 
+      let foundRules = [];
       let validator = {};
       for(let index in rules){
           let rule = rules[index].split(':');
@@ -243,7 +247,12 @@ export default class Validator {
           if(rule.length > 1){
               params = rule[1].split(',');
           }
-          validator[rule[0]] = params
+          let _rule = String(rule[0]);
+          let frls = '';
+          foundRules.filter((el) => el === _rule).forEach(() => frls += '*');
+          foundRules.push(_rule);
+
+          validator[rule[0] + frls] = params
       }
 
       return {
@@ -256,7 +265,7 @@ export default class Validator {
           let params = rules[index];
           switch (index){
               case 'decimal':
-                  value = parseFloat(String(value).replace('.', '').replace(',', '.'));
+                  value = parseFloatLocale(value, params, this.locale);
                   break;
               case 'decimal_en':
                   value = parseFloat(String(value).replace(',', ''))
