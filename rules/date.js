@@ -1,6 +1,7 @@
 import isDate from 'validator/lib/isDate';
 import {parseDateIntoString} from '../utilities/date'
 let moment = require('moment');
+let Holidays = require('date-holidays')
 
 let check = (value, params, scope, otherComponentsInScope, obj, fieldName, locale) => {
     if(params && !Array.isArray(params)){
@@ -28,12 +29,13 @@ let check = (value, params, scope, otherComponentsInScope, obj, fieldName, local
 
     let operator = params[1];
     let delta = params[2];
+    let option = params[3] || null;
 
-    return dateCheck(date, operator, delta, params, locale, otherComponentsInScope);
+    return dateCheck(date, operator, delta, option, params, locale, otherComponentsInScope);
 
 };
 
-let dateCheck = (date, operator, delta, params, locale, otherComponentsInScope) => {
+let dateCheck = (date, operator, delta, option, params, locale, otherComponentsInScope) => {
     let operatorArray = operator.split('-')
     let op = operatorArray[0];
     let field = null;
@@ -41,11 +43,16 @@ let dateCheck = (date, operator, delta, params, locale, otherComponentsInScope) 
         field = operatorArray[1];
     }
 
+    let dateRegex = /^(\d{4}\-\d{2}\-\d{2})$/g;
     date = moment(date).format('YYYY-MM-DD');;
     let second = null
     if(delta === 'now'){
         second = moment().format('YYYY-MM-DD')
-    }else {
+    }else if(dateRegex.test(delta)){//date
+        let match = dateRegex.exec(delta);
+        let date = match[1];
+        second = moment(date).format('YYYY-MM-DD')
+    }else{
         second = buildSecond(params, locale, delta, field, otherComponentsInScope)
     }
 
@@ -57,6 +64,11 @@ let dateCheck = (date, operator, delta, params, locale, otherComponentsInScope) 
         return true;
     }
 
+    let optionCheckValue = optionCheck(option, date);
+
+    if(!optionCheckValue){
+        return false;
+    }
 
     switch (op){
         case '>':
@@ -126,6 +138,41 @@ let buildReferringTime = (params, locale, field, otherComponentsInScope) => {
     }
 
     throw `Dom-validator: date rule: field '${field}' does not exist`
+}
+
+let optionCheck = (option, date) => {
+    if(!option){
+        return true;
+    }
+    let options = String(option).split('_');
+
+    date = moment(date);
+
+    let opt = options[0];
+    let par1 = options[1] || null;
+
+    let myRegexp = /\((.*?)\)$/g;
+    let match = myRegexp.exec(opt);
+    let par2 = null;
+    if(match && match.length > 1){
+        par2 = match[1];
+        opt = opt.replace(`(${par2})`, '');
+    }
+
+
+    if(opt === 'working'){
+        if(!par2){
+            par2 = 'IT'
+        }
+        let hd = new Holidays(par2)
+        if(par1 === 'with-sat'){
+            return date.day() !== 0 && !hd.isHoliday(new Date(date.format('YYYY-MM-DD')));
+        }
+
+        return date.day() !== 6 && date.day() !== 0 && !hd.isHoliday(new Date(date.format('YYYY-MM-DD')));
+    }
+
+    return false
 }
 
 export default check;
