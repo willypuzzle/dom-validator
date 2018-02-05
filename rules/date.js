@@ -44,13 +44,13 @@ let dateCheck = (date, operator, delta, option, params, locale, otherComponentsI
     }
 
     let dateRegex = /^(\d{4}\-\d{2}\-\d{2})$/g;
+    let dateMatch = dateRegex.exec(delta);
     date = moment(date).format('YYYY-MM-DD');;
     let second = null
     if(delta === 'now'){
         second = moment().format('YYYY-MM-DD')
-    }else if(dateRegex.test(delta)){//date
-        let match = dateRegex.exec(delta);
-        let date = match[1];
+    }else if(dateMatch){//date
+        let date = dateMatch[1];
         second = moment(date).format('YYYY-MM-DD')
     }else{
         second = buildSecond(params, locale, delta, field, otherComponentsInScope)
