@@ -265,7 +265,7 @@ export default class Validator {
           let params = rules[index];
           switch (index){
               case 'decimal':
-                  value = parseFloatLocale(value, params, this.locale);
+                  value = parseFloatLocale(value, this.locale);
                   break;
               case 'decimal_en':
                   value = parseFloat(String(value).replace(',', ''))
