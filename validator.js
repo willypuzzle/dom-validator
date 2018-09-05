@@ -182,7 +182,7 @@ export default class Validator {
   _setComponentForValidation(component, errors){
       let ctrl = errors.length > 0;
 
-      component.shouldValidate = ctrl;
+      //component.shouldValidate = ctrl;
 
       component.errorBucket = errors;
 

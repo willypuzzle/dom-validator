@@ -4,11 +4,20 @@
 export const getDataAttribute = (el, name) => el.getAttribute(`data-vv-${name}`);
 
 export const getComponentType = (vm) => {
-  if( !(vm.$options && vm.$options._componentTag) ){
-        warn("Validator.validate, vuetify component interface changed! no componetTag found")
-        return;
+    let classes = vm.$el.className.split(' ');
+    for(let index in classes){
+        let el = classes[index];
+        switch (el) {
+            case ComponentTypes.TEXT_FIELD:
+            case ComponentTypes.SELECT:
+            case ComponentTypes.CHECK_BOX:
+            case ComponentTypes.RADIO:
+            case ComponentTypes.SWITCH:
+                return el;
+        }
     }
-  return vm.$options._componentTag
+
+    warn("Validator.validate, vuetify component interface changed! no componetTag found");
 }
 
 export const ComponentTypes = {
