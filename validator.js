@@ -183,6 +183,9 @@ export default class Validator {
       let ctrl = errors.length > 0;
 
       //component.shouldValidate = ctrl;
+      setTimeout(() => {
+          component.error = ctrl;
+      });
 
       component.errorBucket = errors;
 
