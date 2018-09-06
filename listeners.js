@@ -99,7 +99,7 @@ export default class ListenerGenerator {
    */
   detach () {
     this.vm.$validator.detach(this.fieldName, this.scope);
-    if(this.type === ComponentTypes.TEXT_FIELD || this.type === ComponentTypes.SELECT) {
+    if(this.type === ComponentTypes.TEXT_FIELD || this.type === ComponentTypes.TEXT_AREA || this.type === ComponentTypes.SELECT) {
         if (this.component) {
             this.component.$off('input', this.componentListener);
             this.component.$off('blur', this.componentListener);

@@ -8,6 +8,7 @@ export const getComponentType = (vm) => {
     for(let index in classes){
         let el = classes[index];
         switch (el) {
+            case ComponentTypes.TEXT_AREA:
             case ComponentTypes.TEXT_FIELD:
             case ComponentTypes.SELECT:
             case ComponentTypes.CHECK_BOX:
@@ -21,10 +22,11 @@ export const getComponentType = (vm) => {
 }
 
 export const ComponentTypes = {
+  TEXT_AREA: 'v-textarea',
   TEXT_FIELD: 'v-text-field',
   SELECT: 'v-select',
-  CHECK_BOX: 'v-checkbox',
-  RADIO: 'v-radio-group',
+  CHECK_BOX: 'v-input--checkbox',
+  RADIO: 'v-input--radio-group',
   SWITCH: 'v-switch',
 }
 

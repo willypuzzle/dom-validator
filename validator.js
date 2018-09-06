@@ -110,6 +110,7 @@ export default class Validator {
                   let checkFunction = null;
                   let functionIndex = String(index).replace(/\*+$/g, '')
                   switch (componentTag){
+                      case ComponentTypes.TEXT_AREA:
                       case ComponentTypes.TEXT_FIELD:
                           value = component.lazyValue;
                           checkFunction = Rules[functionIndex];
@@ -195,6 +196,7 @@ export default class Validator {
   _checkForRequired(rules, componentTag, component){
       let value = '';
       switch (componentTag){
+          case ComponentTypes.TEXT_AREA:
           case ComponentTypes.TEXT_FIELD:
               value = component.lazyValue;
               break;
