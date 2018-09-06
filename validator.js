@@ -125,7 +125,7 @@ export default class Validator {
                           checkFunction = MultipleElementRules[functionIndex]
                           break;
                       case ComponentTypes.RADIO:
-                          value = component.inputValue;
+                          value = component.inputValue || component.value;
                           checkFunction = MultipleElementRules[functionIndex]
                           break;
                       case ComponentTypes.SWITCH:
@@ -208,7 +208,7 @@ export default class Validator {
               value = component.inputValue;
               break;
           case ComponentTypes.RADIO:
-              value = component.inputValue;
+              value = component.inputValue || component.value;
               break;
           case ComponentTypes.SWITCH:
               value = component.inputValue;
