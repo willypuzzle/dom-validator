@@ -27,7 +27,7 @@ export const ComponentTypes = {
   SELECT: 'v-select',
   CHECK_BOX: 'v-input--checkbox',
   RADIO: 'v-input--radio-group',
-  SWITCH: 'v-switch',
+  SWITCH: 'v-input--switch',
 }
 
 /**
