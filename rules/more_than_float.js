@@ -35,7 +35,11 @@ export default (value, params, scope, otherComponentsInScope, ownValidator, fiel
                     ownValidator[lockStringKey] = false;
                 }
                 let val = otherComponentsInScope[index].component.inputValue || otherComponentsInScope[index].component.lazyValue;
-                ownValidator.moreThanValue = transformFunction(val) < transformFunction(value);
+                if(_.indexOf(params, 'equal') !== -1) {
+                    ownValidator.moreThanValue = transformFunction(val) <= transformFunction(value);
+                }else{
+                    ownValidator.moreThanValue = transformFunction(val) < transformFunction(value);
+                }
                 return ownValidator.moreThanValue
             }
         }
