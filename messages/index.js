@@ -137,6 +137,7 @@ let it_xs = {
 };
 export default {
     en,
+    en_xs,
     it,
     it_xs,
 }
