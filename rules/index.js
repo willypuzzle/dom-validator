@@ -32,6 +32,7 @@ import required from './required';
 import size from './size';
 import tax_code from './tax_code';
 import telephone from './telephone';
+import uppercase from "./uppercase";
 import url from './url';
 
 export default {
@@ -68,5 +69,6 @@ export default {
   size,
   tax_code,
   telephone,
+  uppercase,
   url
 };
