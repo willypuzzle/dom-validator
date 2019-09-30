@@ -133,6 +133,7 @@ let it_xs = {
     size: (field, [size]) => `Deve essere inferiore a ${size} KB.`,
     tax_code: (field) => `Formato errato.`,
     telephone: (field) => `Formato errato.`,
+    uppercase: (field) => `Il campo deve essere maiuscolo`,
     url: (field) => `Non è un URL valido.`,
 };
 export default {
