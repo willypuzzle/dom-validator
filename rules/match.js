@@ -12,7 +12,7 @@ export default (value, params, scope, otherComponentsInScope, ownValidator, fiel
                 }else{
                     ownValidator[lockStringKey] = false;
                 }
-                ownValidator.matchValue = otherComponentsInScope[index].component.inputValue === value;
+                ownValidator.matchValue = otherComponentsInScope[index].component.value === value;
                 return ownValidator.matchValue
             }
         }
