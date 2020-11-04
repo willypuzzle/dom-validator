@@ -116,7 +116,7 @@ export default class Validator {
                           break;
                       case ComponentTypes.SELECT:
                           let selectItemArray = component.selectedItems;
-                          value = selectItemArray.length ? selectItemArray[0][component.itemValue] : '';
+                          value = selectItemArray.length ? (isObject(selectItemArray[0]) ? selectItemArray[0][component.itemValue] : selectItemArray[0]) : '';
                           checkFunction = Rules[functionIndex]
                           break;
                       case ComponentTypes.CHECK_BOX:
